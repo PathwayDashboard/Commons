@@ -1,0 +1,139 @@
+package it.eng.pathway.fake.model;
+
+import java.util.Date;
+
+import io.swagger.client.model.PreScreeningQuestionnaire;
+import io.swagger.client.model.TrainingProfile;
+
+public class CardiacRehabilitationProgramme {
+
+	private Date creationDate;
+
+	private ExerciseProgramme exerciseProgramme;
+
+	private CardiacRehabilitationProgramme cardiacRehabilitationProgramme;
+
+	private PhysicalActivityProgramme physicalActivityProgramme;
+
+	private BehaviouralChangeProgramme behaviouralChangeProgramme;
+
+	private ExerciseProgramme currentExerciseProgramme;
+
+	private Patient patient;
+
+	private CardiacRehabilitationProgress cardiacRehabilitationProgress;
+
+	private TrainingProfile trainingProfile;
+
+	private PreScreeningQuestionnaire preScreeningQuestionnaire;
+
+	private ExerClassDescription exerClassDescription;
+
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
+	public ExerciseProgramme getExerciseProgramme() {
+		return exerciseProgramme;
+	}
+
+	public void setExerciseProgramme(ExerciseProgramme exerciseProgramme) {
+		this.exerciseProgramme = exerciseProgramme;
+	}
+
+	public CardiacRehabilitationProgramme getCardiacRehabilitationProgramme() {
+		return cardiacRehabilitationProgramme;
+	}
+
+	public void setCardiacRehabilitationProgramme(CardiacRehabilitationProgramme cardiacRehabilitationProgramme) {
+		this.cardiacRehabilitationProgramme = cardiacRehabilitationProgramme;
+	}
+
+	public PhysicalActivityProgramme getPhysicalActivityProgramme() {
+		return physicalActivityProgramme;
+	}
+
+	public void setPhysicalActivityProgramme(PhysicalActivityProgramme physicalActivityProgramme) {
+		this.physicalActivityProgramme = physicalActivityProgramme;
+	}
+
+	public BehaviouralChangeProgramme getBehaviouralChangeProgramme() {
+		return behaviouralChangeProgramme;
+	}
+
+	public void setBehaviouralChangeProgramme(BehaviouralChangeProgramme behaviouralChangeProgramme) {
+		this.behaviouralChangeProgramme = behaviouralChangeProgramme;
+	}
+
+	public ExerciseProgramme getCurrentExerciseProgramme() {
+		return currentExerciseProgramme;
+	}
+
+	public void setCurrentExerciseProgramme(ExerciseProgramme currentExerciseProgramme) {
+		this.currentExerciseProgramme = currentExerciseProgramme;
+	}
+
+	public Patient getPatient() {
+		return patient;
+	}
+
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
+
+	public CardiacRehabilitationProgress getCardiacRehabilitationProgress() {
+		return cardiacRehabilitationProgress;
+	}
+
+	public void setCardiacRehabilitationProgress(CardiacRehabilitationProgress cardiacRehabilitationProgress) {
+		this.cardiacRehabilitationProgress = cardiacRehabilitationProgress;
+	}
+
+	public TrainingProfile getTrainingProfile() {
+		return trainingProfile;
+	}
+
+	public void setTrainingProfile(TrainingProfile trainingProfile) {
+		this.trainingProfile = trainingProfile;
+	}
+
+	public PreScreeningQuestionnaire getPreScreeningQuestionnaire() {
+		return preScreeningQuestionnaire;
+	}
+
+	public void setPreScreeningQuestionnaire(PreScreeningQuestionnaire preScreeningQuestionnaire) {
+		this.preScreeningQuestionnaire = preScreeningQuestionnaire;
+	}
+
+	public ExerClassDescription getExerClassDescription() {
+		return exerClassDescription;
+	}
+
+	public void setExerClassDescription(ExerClassDescription exerClassDescription) {
+		this.exerClassDescription = exerClassDescription;
+	}
+
+
+	public HealthFitnessAssessmentPreScreeningQuestionnaire getHealthFitnessAssessmentPreScreeningQuestionnaire() {
+		return healthFitnessAssessmentPreScreeningQuestionnaire;
+	}
+
+	public void setHealthFitnessAssessmentPreScreeningQuestionnaire(
+			HealthFitnessAssessmentPreScreeningQuestionnaire healthFitnessAssessmentPreScreeningQuestionnaire) {
+		this.healthFitnessAssessmentPreScreeningQuestionnaire = healthFitnessAssessmentPreScreeningQuestionnaire;
+	}
+
+	private HealthFitnessAssessmentPreScreeningQuestionnaire healthFitnessAssessmentPreScreeningQuestionnaire;
+
+	@Override
+	public String toString() {
+		return "CardiacRehabilitationProgramme [cardiacRehabilitationProgress=" + cardiacRehabilitationProgress + "]";
+	}
+	
+	
+
+}

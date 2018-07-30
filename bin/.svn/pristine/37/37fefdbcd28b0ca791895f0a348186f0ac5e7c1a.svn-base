@@ -1,0 +1,55 @@
+package it.eng.pathway.fake.model;
+
+import it.eng.pathway.utility.StringUtil;
+
+public enum ActivityType {
+
+	RUNNING(1,"resources/images/jpg/running_filled.png"),
+	WALKING(3,"resources/images/jpg/walking_filled.png"),
+	CYCLING(2,"resources/images/jpg/regular_biking_filled.png"), 
+	GOLF(32,"resources/images/jpg/golf_filled.png"), 
+	GUIDEDWORKOUT(105,"resources/images/jpg/gymnastic_filled.png"), 
+	FREEPLAY(0,"resources/images/jpg/trampoline_park_filled.png"),
+	
+	
+	DAILYLIVINGACTIVITY(0,""),
+	ROWING(8,""),
+	SWIMMING(22,""),
+	SOCCER(35,""),
+	CRICKET(36,""),
+	BASKETBALL(37,""),
+	RUGBY(39,""),
+	VOLLEYBALL(41,""),
+	HANDBALL(44,""),
+	BEACHVOLLEY(45,""),
+	DANCING(48,""),
+	RIDING(50,""),
+	FITNESSMARTIALARTS(52,""),
+	BOOTCAMP(54,""),
+	AEROBICS(57,""),
+	AQUAFITNESS(58,""),
+	STEPWORKOUT(59,""),
+	SAILING(69,""),
+	TABLETENNIS(72,""),
+	CLIMBING(74,""),
+	GYMNASTICS(90,""),
+	RACKETSPORTS(104,""),
+	STRENGTHCONDITIONING(105,""),
+	MOBILITYSTABILITY(106,"");
+	
+	private int code;
+	private String path;
+
+	ActivityType(int numVal, String path) {
+        this.code = numVal;
+        this.path = StringUtil.isValid(path) ? path : "resources/images/jpg/walking_filled.png"; 
+    }
+
+    public int getCode() {
+        return code;
+    }
+    
+    public String getPath(){
+    	return path;
+    }
+}

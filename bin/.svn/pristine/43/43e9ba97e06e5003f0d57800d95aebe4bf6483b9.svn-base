@@ -1,0 +1,153 @@
+package it.eng.pathway.fake.model;
+
+import io.swagger.client.model.ExerGameSessionSubsection;
+import io.swagger.client.model.ExerGameSessioncoolDownInfoSubSubsection;
+import io.swagger.client.model.ExerGameSessionmainInfoSubSubsection;
+import io.swagger.client.model.ExerGameSessionwarmingUpInfoSubSubsection;
+import it.eng.pathway.utility.DateMgt;
+
+public class ExerGameSession extends ExerciseSession {
+
+	private Integer score;
+
+	private StatusType status;
+
+	private TrainingPhaseInfo warmingDuration;
+
+
+	private TrainingPhaseInfo mainDuration;
+
+	private TrainingPhaseInfo coolDownDuration;
+
+
+	private SatisfactionLevelType sessionSatisfactionLevel;
+
+	private TrainingPhaseInfo trainingPhaseInfo;
+	
+	
+	public ExerGameSession() {
+		super();
+	}
+	
+	public ExerGameSession(ExerGameSessionSubsection hdmsGame) {
+		super();
+		setDate(hdmsGame.getDate());
+		setDuration(hdmsGame.getDuration());
+//		setEndTime(hdmsGame.getCrProgressExerGameSessionEndTime());
+		setEnergyExpenditure(new EnergyExpenditureObservation(hdmsGame.getExpenditure()));
+//		setStartTime(hdmsGame.getCrProgressExerGameSessionStartTime());
+		
+		setStartTime(DateMgt.getReadableTime(hdmsGame.getStartTime()));
+		setEndTime(DateMgt.getReadableTime(hdmsGame.getEndTime()));
+		
+		warmingDuration=new TrainingPhaseInfo();
+		ExerGameSessionwarmingUpInfoSubSubsection wu=hdmsGame.getWarmingupInfo();
+		warmingDuration.setDuration(wu.getDuration());
+		Double val=wu.getAverageHRBpm()!=null ? (double) wu.getAverageHRBpm() : 0; //TODO issue to report
+		warmingDuration.setAverageHR(val!=null ? val.floatValue() : 0);
+		warmingDuration.setMinHR(wu.getMinHRBpm());
+		warmingDuration.setMaxHR(wu.getMaxHRBpm());
+		
+		mainDuration=new TrainingPhaseInfo();
+		
+		ExerGameSessionmainInfoSubSubsection main=hdmsGame.getMainInfo();
+		mainDuration.setDuration(main.getDuration());
+		val=main.getAverageHRBpm();
+//		mainDuration.setAverageHR(val!=null ? val.floatValue() : 0);
+		mainDuration.setMinHR(main.getMinHRBpm());
+		mainDuration.setMaxHR(main.getMaxHRBpm());
+		
+		coolDownDuration=new TrainingPhaseInfo();
+		ExerGameSessioncoolDownInfoSubSubsection cd=hdmsGame.getCooldownInfo();
+		coolDownDuration.setDuration(cd.getDuration());
+		val=cd.getAverageHRBpm();
+		coolDownDuration.setAverageHR(val!=null ? val.floatValue() : 0);
+		coolDownDuration.setMinHR(cd.getMinHRBpm());
+		coolDownDuration.setMaxHR(cd.getMaxHRBpm());
+		
+		
+		Integer pos;
+		pos=hdmsGame.getStatus();
+		if (pos!=null)
+			status=StatusType.values()[pos]; //non è un'enumeration. Provo a prendere l'Integer che c'è e creando un array dalla nostra enumeration ne prend il valore
+		
+		pos=hdmsGame.getSessionSatisfactionLevel();
+		if (pos!=null)
+			sessionSatisfactionLevel=SatisfactionLevelType.values()[pos]; //stesso ragionamento
+		
+		score=hdmsGame.getScore();
+		
+		setTrainingProfile(ExerClassSession.creteFakeTrainingProfile());
+	}
+
+	public Integer getScore() {
+		return score;
+	}
+
+	public void setScore(Integer score) {
+		this.score = score;
+	}
+
+	public StatusType getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusType status) {
+		this.status = status;
+	}
+
+
+	public TrainingPhaseInfo getCoolDownDuration() {
+		return coolDownDuration;
+	}
+
+	public void setCoolDownDuration(TrainingPhaseInfo coolDownDuration) {
+		this.coolDownDuration = coolDownDuration;
+	}
+
+
+	public SatisfactionLevelType getSessionSatisfactionLevel() {
+		return sessionSatisfactionLevel;
+	}
+
+	public void setSessionSatisfactionLevel(SatisfactionLevelType sessionSatisfactionLevel) {
+		this.sessionSatisfactionLevel = sessionSatisfactionLevel;
+	}
+
+	public TrainingPhaseInfo getTrainingPhaseInfo() {
+		return trainingPhaseInfo;
+	}
+
+	public void setTrainingPhaseInfo(TrainingPhaseInfo trainingPhaseInfo) {
+		this.trainingPhaseInfo = trainingPhaseInfo;
+	}
+
+	public TrainingPhaseInfo getWarmingDuration() {
+		return warmingDuration;
+	}
+
+	public void setWarmingDuration(TrainingPhaseInfo warmingDuration) {
+		this.warmingDuration = warmingDuration;
+	}
+
+	public TrainingPhaseInfo getMainDuration() {
+		return mainDuration;
+	}
+
+	public void setMainDuration(TrainingPhaseInfo mainDuration) {
+		this.mainDuration = mainDuration;
+	}
+
+	@Override
+	public String toString() {
+		return "ExerGameSession [score=" + score + ", status=" + status + ", warmingDuration=" + warmingDuration
+				+ ", mainDuration=" + mainDuration + ", coolDownDuration=" + coolDownDuration
+				+ ", sessionSatisfactionLevel=" + sessionSatisfactionLevel + ", trainingPhaseInfo=" + trainingPhaseInfo
+				+ ", getDuration()=" + getDuration() + ", getEnergyExpenditure()=" + getEnergyExpenditure()
+				+ ", getStartTime()=" + getStartTime() + ", getEndTime()=" + getEndTime() + "]";
+	}
+
+	
+	
+
+}

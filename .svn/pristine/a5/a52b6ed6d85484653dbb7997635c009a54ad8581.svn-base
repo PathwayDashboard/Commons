@@ -1,0 +1,12 @@
+package it.eng.pathway.fake.model;
+
+public enum ActivityType {
+
+	RUNNING,
+	WALKING,
+	CYCLING, 
+	GOLF, 
+	GUIDEDWORKOUT, 
+	FREEPLAY;
+	
+}

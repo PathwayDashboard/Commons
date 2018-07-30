@@ -1,0 +1,9 @@
+package it.eng.pathway.fake.model;
+
+public class HRZone {
+
+	private Integer minimumHR;
+
+	private Integer maximumHR;
+
+}

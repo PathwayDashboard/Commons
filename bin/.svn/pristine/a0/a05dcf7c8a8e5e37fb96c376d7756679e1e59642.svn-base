@@ -1,0 +1,109 @@
+package it.eng.pathway.fake.model;
+
+import java.io.File;
+import java.util.Date;
+
+import io.swagger.client.model.ExerClassSessionSS;
+
+public class ExerciseSession {
+
+	private Date date;
+
+	private String startTime;
+
+	private String endTime;
+
+	private Integer duration;
+
+	private File hr_file;
+
+	private EnergyExpenditureObservation energyExpenditure;
+
+	private File file;
+
+	private CardiacRehabilitationProgress cardiacRehabilitationProgress;
+
+	
+	
+	public ExerciseSession() {
+		super();
+	}
+
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public Integer getDuration() {
+		return duration;
+	}
+
+	public void setDuration(Integer duration) {
+		this.duration = duration;
+	}
+
+	public File getHr_file() {
+		return hr_file;
+	}
+
+	public void setHr_file(File hr_file) {
+		this.hr_file = hr_file;
+	}
+
+	public EnergyExpenditureObservation getEnergyExpenditure() {
+		return energyExpenditure;
+	}
+
+	public void setEnergyExpenditure(EnergyExpenditureObservation energyExpenditure) {
+		this.energyExpenditure = energyExpenditure;
+	}
+
+	public File getFile() {
+		return file;
+	}
+
+	public void setFile(File file) {
+		this.file = file;
+	}
+
+	public CardiacRehabilitationProgress getCardiacRehabilitationProgress() {
+		return cardiacRehabilitationProgress;
+	}
+
+	public void setCardiacRehabilitationProgress(CardiacRehabilitationProgress cardiacRehabilitationProgress) {
+		this.cardiacRehabilitationProgress = cardiacRehabilitationProgress;
+	}
+
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+
+
+	public boolean isValid() {
+		return (
+			date!=null &&
+			startTime !=null && 
+			endTime !=null
+				);
+	}
+
+	
+	
+
+}

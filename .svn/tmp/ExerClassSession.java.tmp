@@ -1,0 +1,191 @@
+package it.eng.pathway.fake.model;
+
+import java.util.Arrays;
+import java.util.List;
+
+import io.swagger.client.model.ExerClassSessionSS;
+import it.eng.pathway.utility.DateMgt;
+
+public class ExerClassSession extends ExerciseSession {
+
+	private StatusType status;
+
+	private TrainingPhaseInfo warmingDuration;
+
+//	private TrainingPhaseInfo stretchingDuration;
+
+	private TrainingPhaseInfo mainDuration;
+
+	private TrainingPhaseInfo coolDownDuration;
+
+//	private TrainingPhaseInfo relaxationDuration;
+
+	private SatisfactionLevelType sessionSatisfactionLevel;
+
+	private List executedExercises;
+
+	private StatusType statusType;
+
+	private SatisfactionLevelType satisfactionLevelType;
+
+	private HRZone hRZone;
+
+	private ExerClassExercise[] exerClassExercise;
+
+	private TrainingPhaseInfo trainingPhaseInfo;
+	
+	
+	
+
+	public ExerClassSession() {
+		super();
+	}
+	
+	public ExerClassSession (ExerClassSessionSS hdmsClassSession){ //per conservare l'ereditarietà 
+		super();
+		setDate(hdmsClassSession.getCrProgressExerClassSessionDate());
+		setDuration(hdmsClassSession.getCrProgressExerClassSessionDuration());
+//		setEndTime(hdmsClassSession.getCrProgressExerClassSessionEndTime());
+		setEnergyExpenditure(new EnergyExpenditureObservation(hdmsClassSession.getCrProgressExerClassSessionExpenditureObservationValue()));
+//		setStartTime(hdmsClassSession.getCrProgressExerClassSessionStartTime());
+		
+		setStartTime(DateMgt.getReadableTime(hdmsClassSession.getCrProgressExerClassSessionStartTime()));
+		setEndTime(DateMgt.getReadableTime(hdmsClassSession.getCrProgressExerClassSessionEndTime()));
+		
+		warmingDuration=new TrainingPhaseInfo();
+		warmingDuration.setDuration(hdmsClassSession.getExerClassSessionWarningUpInfoDuration());
+		Double val=hdmsClassSession.getExerClassSessionWarningUpInfoAverageHRBpm();
+		warmingDuration.setAverageHR(val!=null ? val.floatValue() : 0);
+		warmingDuration.setMinHR(hdmsClassSession.getExerClassSessionWarningUpInfoMinHRBpm());
+		warmingDuration.setMaxHR(hdmsClassSession.getExerClassSessionWarningUpInfoMaxHRBpm());
+		
+		mainDuration=new TrainingPhaseInfo();
+		mainDuration.setDuration(hdmsClassSession.getExerClassSessionMainInfoDuration());
+//		val=hdmsClassSession.getExerClassSessionMainInfoAverageHRBpm();
+//		mainDuration.setAverageHR(val!=null ? val.floatValue() : 0);
+		mainDuration.setMinHR(hdmsClassSession.getExerClassSessionMainInfoMinHRBpm());
+		mainDuration.setMaxHR(hdmsClassSession.getExerClassSessionMainInfoMaxHRBpm());
+		
+		coolDownDuration=new TrainingPhaseInfo();
+		coolDownDuration.setDuration(hdmsClassSession.getExerClassSessionCoolDownInfoDuration());
+		val=hdmsClassSession.getExerClassSessionCoolDownInfoAverageHRBpm();
+		coolDownDuration.setAverageHR(val!=null ? val.floatValue() : 0);
+		coolDownDuration.setMinHR(hdmsClassSession.getExerClassSessionCoolDownInfoMinHRBpm());
+		coolDownDuration.setMaxHR(hdmsClassSession.getExerClassSessionCoolDownInfoMaxHRBpm());
+		
+//		executedExercises=hdmsClassSession.getExerClassSessionExerClassExercisess(); //old version
+		executedExercises=hdmsClassSession.getExecutedExerClassSessionExercisess();
+		Integer pos;
+		pos=hdmsClassSession.getExerClassSessionStatus();
+		if (pos!=null && pos<StatusType.values().length)
+			status=StatusType.values()[pos]; //non è un'enumeration. Provo a prendere l'Integer che c'è e creando un array dalla nostra enumeration ne prend il valore
+		
+		pos=hdmsClassSession.getExerClassSessionSessionSatisfactionLevel();
+		if (pos!=null && pos<SatisfactionLevelType.values().length)
+			sessionSatisfactionLevel=SatisfactionLevelType.values()[pos]; //stesso ragionamento
+	}
+	
+
+	public StatusType getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusType status) {
+		this.status = status;
+	}
+
+	public TrainingPhaseInfo getWarmingDuration() {
+		return warmingDuration;
+	}
+
+	public void setWarmingDuration(TrainingPhaseInfo warmingDuration) {
+		this.warmingDuration = warmingDuration;
+	}
+
+	public TrainingPhaseInfo getMainDuration() {
+		return mainDuration;
+	}
+
+	public void setMainDuration(TrainingPhaseInfo mainDuration) {
+		this.mainDuration = mainDuration;
+	}
+
+	public TrainingPhaseInfo getCoolDownDuration() {
+		return coolDownDuration;
+	}
+
+	public void setCoolDownDuration(TrainingPhaseInfo coolDownDuration) {
+		this.coolDownDuration = coolDownDuration;
+	}
+
+	public SatisfactionLevelType getSessionSatisfactionLevel() {
+		return sessionSatisfactionLevel;
+	}
+
+	public void setSessionSatisfactionLevel(SatisfactionLevelType sessionSatisfactionLevel) {
+		this.sessionSatisfactionLevel = sessionSatisfactionLevel;
+	}
+
+	public List getExecutedExercises() {
+		return executedExercises;
+	}
+
+	public void setExecutedExercises(List executedExercises) {
+		this.executedExercises = executedExercises;
+	}
+
+	public StatusType getStatusType() {
+		return statusType;
+	}
+
+	public void setStatusType(StatusType statusType) {
+		this.statusType = statusType;
+	}
+
+	public SatisfactionLevelType getSatisfactionLevelType() {
+		return satisfactionLevelType;
+	}
+
+	public void setSatisfactionLevelType(SatisfactionLevelType satisfactionLevelType) {
+		this.satisfactionLevelType = satisfactionLevelType;
+	}
+
+	public HRZone gethRZone() {
+		return hRZone;
+	}
+
+	public void sethRZone(HRZone hRZone) {
+		this.hRZone = hRZone;
+	}
+
+	public ExerClassExercise[] getExerClassExercise() {
+		return exerClassExercise;
+	}
+
+	public void setExerClassExercise(ExerClassExercise[] exerClassExercise) {
+		this.exerClassExercise = exerClassExercise;
+	}
+
+	public TrainingPhaseInfo getTrainingPhaseInfo() {
+		return trainingPhaseInfo;
+	}
+
+	public void setTrainingPhaseInfo(TrainingPhaseInfo trainingPhaseInfo) {
+		this.trainingPhaseInfo = trainingPhaseInfo;
+	}
+
+	@Override
+	public String toString() {
+		return "ExerClassSession [status=" + status + ", warmingDuration=" + warmingDuration + ", mainDuration="
+				+ mainDuration + ", coolDownDuration=" + coolDownDuration + ", sessionSatisfactionLevel="
+				+ sessionSatisfactionLevel + ", executedExercises=" + executedExercises + ", statusType=" + statusType
+				+ ", satisfactionLevelType=" + satisfactionLevelType + ", hRZone=" + hRZone + ", exerClassExercise="
+				+ Arrays.toString(exerClassExercise) + ", trainingPhaseInfo=" + trainingPhaseInfo + ", getDuration()="
+				+ getDuration() + ", getStartTime()=" + getStartTime() + ", getEndTime()=" + getEndTime() + "]";
+	}
+
+
+	
+	
+
+}

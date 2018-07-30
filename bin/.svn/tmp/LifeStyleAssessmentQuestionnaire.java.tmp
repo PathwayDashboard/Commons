@@ -1,0 +1,11 @@
+package it.eng.pathway.fake.model;
+
+import java.util.List;
+
+public class LifeStyleAssessmentQuestionnaire {
+
+	private List questionsList;
+
+	private BehaviouralChangeProgramme behaviouralChangeProgramme;
+
+}

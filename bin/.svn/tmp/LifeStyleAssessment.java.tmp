@@ -1,0 +1,14 @@
+package it.eng.pathway.fake.model;
+
+import java.util.Date;
+import java.util.List;
+
+public class LifeStyleAssessment {
+
+	private List answersList;
+
+	private Date sumbissionDate;
+
+	private BehaviouralChangeProgress behaviouralChangeProgress;
+
+}

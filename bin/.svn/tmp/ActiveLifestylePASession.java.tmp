@@ -1,0 +1,122 @@
+package it.eng.pathway.fake.model;
+
+import java.io.Serializable;
+
+import io.swagger.client.model.CrProgressActiveLifestylePASessionSS;
+import it.eng.pathway.utility.DateMgt;
+
+public class ActiveLifestylePASession extends ExerciseSession implements Comparable<ActiveLifestylePASession>,Serializable {
+
+	private static final long serialVersionUID = 8648147965678498685L;
+
+	private Integer averageHeartRate;
+
+	private Integer stepsNumber;
+	
+	private ActivityType type;
+	
+	private boolean monitored;
+	
+	private String description;
+	
+	private ActiveLifestylePAIntensityType intensity;
+	
+
+	public ActiveLifestylePASession() {
+		super();
+	}
+
+	public ActiveLifestylePASession(CrProgressActiveLifestylePASessionSS pa) {
+		super();
+		setDate(pa.getCrProgressActiveLifestylePASessionDate());
+		setDuration(pa.getCrProgressActiveLifestylePASessionDuration());
+//		setEndTime(pa.getCrProgressActiveLifestylePASessionEndTime());
+		setEnergyExpenditure(new EnergyExpenditureObservation(pa.getCrProgressActiveLifestylePASessionExpenditureObservationValue()));
+//		setStartTime(pa.getCrProgressActiveLifestylePASessionStartTime());
+		
+		setStartTime(DateMgt.getReadableTime(pa.getCrProgressActiveLifestylePASessionStartTime()));
+		setEndTime(DateMgt.getReadableTime(pa.getCrProgressActiveLifestylePASessionEndTime()));
+		
+		this.averageHeartRate=pa.getCrProgressActiveLifestylePASessionAverageHeartRate();
+		this.description=pa.getCrProgressActiveLifestylePASessionDescription();
+		
+		Integer pos;
+		pos=pa.getCrProgressActiveLifestylePASessionIntensity();
+		if(pos!=null)
+			this.intensity=ActiveLifestylePAIntensityType.values()[pos];
+		
+		this.monitored=(pa.getCrProgressActiveLifestylePASessionMonitored()!=null && pa.getCrProgressActiveLifestylePASessionMonitored()!=0); //hanno i boolean modellati con degli INT
+		this.stepsNumber=pa.getCrProgressActiveLifestylePASessionStepsNumber();
+		
+		pos=pa.getCrProgressActiveLifestylePASessionType();
+		if(pos!=null)
+		this.type=ActivityType.values()[pos];
+		
+		
+	}
+
+	public Integer getAverageHeartRate() {
+		return averageHeartRate;
+	}
+
+	public void setAverageHeartRate(Integer averageHeartRate) {
+		this.averageHeartRate = averageHeartRate;
+	}
+
+	public Integer getStepsNumber() {
+		return stepsNumber;
+	}
+
+	public void setStepsNumber(Integer stepsNumber) {
+		this.stepsNumber = stepsNumber;
+	}
+
+	public ActivityType getType() {
+		return type;
+	}
+
+	public void setType(ActivityType type) {
+		this.type = type;
+	}
+
+	public boolean isMonitored() {
+		return monitored;
+	}
+
+	public void setMonitored(boolean monitored) {
+		this.monitored = monitored;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public ActiveLifestylePAIntensityType getIntensity() {
+		return intensity;
+	}
+
+	public void setIntensity(ActiveLifestylePAIntensityType intensity) {
+		this.intensity = intensity;
+	}
+
+	@Override
+	public String toString() {
+		return "ActiveLifestylePASession [averageHeartRate=" + averageHeartRate + ", stepsNumber=" + stepsNumber
+				+ ", type=" + type + ", monitored=" + monitored + ", description=" + description + ", intensity="
+				+ intensity + ", getDate()=" + getDate() + ", getDuration()=" + getDuration() + ", getStart_time()="
+				+ getStartTime() + ", getEnd_time()=" + getEndTime() + "]";
+	}
+
+	@Override
+	public int compareTo(ActiveLifestylePASession o) {
+//		return this.getDate().compareTo(o.getDate()); //crescente
+		return o.getDate().compareTo(this.getDate()); //DEcrescente
+	}
+	
+	
+
+}

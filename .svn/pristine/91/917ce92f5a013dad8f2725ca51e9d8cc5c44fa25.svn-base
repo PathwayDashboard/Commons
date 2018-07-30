@@ -1,0 +1,142 @@
+package it.eng.pathway.utility;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.StringTokenizer;
+
+public class HrFileHandler {
+	
+	
+	public static List<HrMeasure> parse(String read){
+		ArrayList<HrMeasure> hrs=new ArrayList<HrMeasure>();
+		if (StringUtil.isValid(read)){
+			StringTokenizer st=new StringTokenizer(read, ";");
+			while(st.hasMoreTokens()){
+//				Integer s=Integer.parseInt(st.nextToken());
+				Integer v=Integer.parseInt(st.nextToken());
+//				hrs.add(new HrMeasure(s, v));
+				hrs.add(new HrMeasure(v));
+			}
+		}
+		return hrs;
+	}
+	
+	public static String createString(List<HrMeasure> hrs){
+		String hrFile = "";
+		if (hrs!=null){
+//			int tot=hrs.size();
+//			for (int i=0;i<tot-1;i++){
+//				hrFile+=hrs.get(i).toString();
+//			}
+//			hrFile+=hrs.get(tot-1).toString();
+			for (HrMeasure current : hrs) {
+				hrFile+=current.toString();
+			}
+		}
+		return hrFile;
+	}
+	/**
+	 * 
+	 * @param min
+	 * @param max
+	 * @param duration in minutes
+	 * @param adding TODO
+	 * @param speed TODO
+	 * @return
+	 */
+	public static List<HrMeasure> createFile(int min, int max, int duration, boolean adding, double speed){
+		boolean minPresente = false;
+		boolean maxPresente = false;
+		Random r=new Random();
+		ArrayList<HrMeasure> hrs=new ArrayList<HrMeasure>();
+		int secs=duration*60;
+		for (int i=1;i<=secs;i++){
+//			Integer value=r.nextInt((max+40 - min-30)/2) + min;
+//			if (!minPresente)
+//				minPresente = (value==min);
+//			if (!maxPresente)
+//				maxPresente = (value==max);
+//			if (i< (secs/3) && !minPresente){
+//				value = min;
+//				minPresente = true;
+//			}
+//			
+//			if (i> 2*(secs/3) && !maxPresente){
+//				value = max;
+//				maxPresente = true;
+//			}
+			
+			Integer value = 0;
+			Integer minute = (Integer) (i/60); 
+			Integer random = adding ? 3 + r.nextInt(4) : 8 + r.nextInt(5);
+			if (adding)
+				value = (int) (min + (double) minute * (speed) + (double) random*(speed/(double) 2));
+			else{
+				value = (int) ( max - (double) minute * (speed) - (double) random*(speed/(double) 2) );
+			}
+			
+//			HrMeasure hr=new HrMeasure(i, value);
+			HrMeasure hr=new HrMeasure(value);
+			hrs.add(hr);
+		}
+		return hrs;
+	}
+	
+	public static Double calculateAverage(List<HrMeasure> hrs){
+		Double sum = (double) 0;
+		Double count = (double) hrs.size();
+		if (hrs!=null){
+			for (HrMeasure current : hrs) {
+				sum+=(double) current.getValue();
+			}
+		}
+		Double avg = sum/count;
+		return avg;
+	}
+	
+	public static List<HrMeasure> combinePhases(int wumin, int wumax, int wuduration, int aemin, int aemax, int aeduration, int cdmin, int cdmax, int cdduration){
+		List<HrMeasure> hrs = new ArrayList<HrMeasure>();
+		hrs.addAll(createFile(wumin, wumax, wuduration, true, 6.5));
+		hrs.addAll(createFile(aemin, aemax, aeduration, true, 3.5));
+		hrs.addAll(createFile(cdmin, cdmax, cdduration, false, 20));
+		return hrs;
+	}
+	/**
+	 * 
+	 * @param hrs
+	 * @param wuduration in minutes
+	 * @param aeduration in minutes
+	 * @param cdduration in minutes
+	 * @return
+	 */
+	public static Double[] calculateAllAverage(List<HrMeasure> hrs, int wuduration, int aeduration, int cdduration){
+		Double[] avgs = new Double[3];
+		Double sum = (double) 0;
+		if (hrs!=null){
+			int wumax=60*wuduration;
+			int aemax=wumax+ 60*aeduration;
+			int cdmax=aemax+ 60*cdduration;
+			
+			for (int i=0;i<wumax;i++){
+				sum+=(double) hrs.get(i).getValue();
+			}
+			avgs[0] = sum/(double) (60*wuduration);
+			sum = (double) 0;
+			
+			for (int i=wumax;i<aemax;i++){
+				sum+=(double) hrs.get(i).getValue();
+			}
+			avgs[1] = sum/(double) (60*aeduration);
+			sum = (double) 0;
+			
+			for (int i=aemax;i<cdmax;i++){
+				sum+=(double) hrs.get(i).getValue();
+			}
+			avgs[2] = sum/(double) (60*cdduration);
+		}
+		
+		return avgs;
+	}
+
+}

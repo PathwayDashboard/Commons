@@ -1,0 +1,197 @@
+package it.eng.pathway.fake.model;
+
+import java.io.Serializable;
+
+import io.swagger.client.model.ActiveLifestylePASessionSubsection;
+import it.eng.pathway.utility.DateMgt;
+
+public class ActiveLifestylePASession extends ExerciseSession implements Comparable<ActiveLifestylePASession>,Serializable {
+
+	private static final long serialVersionUID = 8648147965678498685L;
+
+	private Integer averageHeartRate;
+
+	private Integer stepsNumber;
+	
+	private ActivityType type;
+	
+	private boolean monitored;
+	
+	private String description;
+	
+	private ActiveLifestylePAIntensityType intensity;
+	
+	private Integer minIn050;
+	
+	private Integer minIn5160;
+	
+	private Integer minIn6170;
+	
+	private Integer minIn7180;
+	
+	private Integer minIn8190;
+	
+	private Integer minIn91100;
+	
+	private Integer minIn101;
+	
+
+	public ActiveLifestylePASession() {
+		super();
+	}
+
+	public ActiveLifestylePASession(ActiveLifestylePASessionSubsection pa) {
+		super();
+		setDate(pa.getDate());
+		setDuration(pa.getDuration());
+//		setEndTime(pa.getCrProgressActiveLifestylePASessionEndTime());
+		setEnergyExpenditure(new EnergyExpenditureObservation(pa.getEnergyExpenditure()));
+//		setStartTime(pa.getCrProgressActiveLifestylePASessionStartTime());
+		
+		setStartTime(DateMgt.getReadableTime(pa.getStartTime()));
+		setEndTime(DateMgt.getReadableTime(pa.getEndTime()));
+		
+		this.averageHeartRate=pa.getAverageHeartRate();
+		this.description=pa.getDescription();
+		
+		Integer pos;
+		pos=pa.getIntensity();
+		if(pos!=null)
+			this.intensity=ActiveLifestylePAIntensityType.values()[pos];
+		
+		this.monitored=(pa.getMonitored()!=null && pa.getMonitored()!=0); //hanno i boolean modellati con degli INT
+		this.stepsNumber=pa.getStepsNumber();
+		
+		pos=pa.getType();
+		if(pos!=null)
+		this.type=ActivityType.values()[pos];
+		
+		this.setAcceptable(pa.getAcceptable()!=null && pa.getAcceptable()==1);
+		
+		
+		//TODO
+//		aggiungere i setting delle zone MS
+		
+	}
+
+	public Integer getAverageHeartRate() {
+		return averageHeartRate;
+	}
+
+	public void setAverageHeartRate(Integer averageHeartRate) {
+		this.averageHeartRate = averageHeartRate;
+	}
+
+	public Integer getStepsNumber() {
+		return stepsNumber;
+	}
+
+	public void setStepsNumber(Integer stepsNumber) {
+		this.stepsNumber = stepsNumber;
+	}
+
+	public ActivityType getType() {
+		return type;
+	}
+
+	public void setType(ActivityType type) {
+		this.type = type;
+	}
+
+	public boolean isMonitored() {
+		return monitored;
+	}
+
+	public void setMonitored(boolean monitored) {
+		this.monitored = monitored;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public ActiveLifestylePAIntensityType getIntensity() {
+		return intensity;
+	}
+
+	public void setIntensity(ActiveLifestylePAIntensityType intensity) {
+		this.intensity = intensity;
+	}
+
+	@Override
+	public String toString() {
+		return "ActiveLifestylePASession [averageHeartRate=" + averageHeartRate + ", stepsNumber=" + stepsNumber
+				+ ", type=" + type + ", monitored=" + monitored + ", description=" + description + ", intensity="
+				+ intensity + ", getDate()=" + getDate() + ", getDuration()=" + getDuration() + ", getStart_time()="
+				+ getStartTime() + ", getEnd_time()=" + getEndTime() + "]";
+	}
+
+	@Override
+	public int compareTo(ActiveLifestylePASession o) {
+//		return this.getDate().compareTo(o.getDate()); //crescente
+		return o.getDate().compareTo(this.getDate()); //DEcrescente
+	}
+
+	public Integer getMinIn050() {
+		return minIn050;
+	}
+
+	public void setMinIn050(Integer minIn050) {
+		this.minIn050 = minIn050;
+	}
+
+	public Integer getMinIn5160() {
+		return minIn5160;
+	}
+
+	public void setMinIn5160(Integer minIn5160) {
+		this.minIn5160 = minIn5160;
+	}
+
+	public Integer getMinIn6170() {
+		return minIn6170;
+	}
+
+	public void setMinIn6170(Integer minIn6170) {
+		this.minIn6170 = minIn6170;
+	}
+
+	public Integer getMinIn7180() {
+		return minIn7180;
+	}
+
+	public void setMinIn7180(Integer minIn7180) {
+		this.minIn7180 = minIn7180;
+	}
+
+	public Integer getMinIn8190() {
+		return minIn8190;
+	}
+
+	public void setMinIn8190(Integer minIn8190) {
+		this.minIn8190 = minIn8190;
+	}
+
+	public Integer getMinIn91100() {
+		return minIn91100;
+	}
+
+	public void setMinIn91100(Integer minIn91100) {
+		this.minIn91100 = minIn91100;
+	}
+
+	public Integer getMinIn101() {
+		return minIn101;
+	}
+
+	public void setMinIn101(Integer minIn101) {
+		this.minIn101 = minIn101;
+	}
+	
+	
+
+}

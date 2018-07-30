@@ -1,0 +1,100 @@
+package it.eng.pathway.fake.model;
+
+public class ExerciseProgramme {
+
+	private Integer weeklyFrequency;
+
+	private Integer exerciseIntensity;
+
+	private Integer weeklyTime;
+
+	private Integer sessionDuration;
+
+	private Integer numberOfExerClass;
+
+	private Integer numberOfExerGame;
+
+	private Integer numberOfActiveLifestyleActivity;
+	
+	private CardiacRehabilitationProgramme cardiacRehabilitationProgramme;
+
+	private WorkoutSession workoutSession;
+
+
+	public Integer getWeeklyFrequency() {
+		return weeklyFrequency;
+	}
+
+	public void setWeeklyFrequency(Integer weeklyFrequency) {
+		this.weeklyFrequency = weeklyFrequency;
+	}
+
+	public Integer getExerciseIntensity() {
+		return exerciseIntensity;
+	}
+
+	public void setExerciseIntensity(Integer exerciseIntensity) {
+		this.exerciseIntensity = exerciseIntensity;
+	}
+
+	public Integer getWeeklyTime() {
+		return weeklyTime;
+	}
+
+	public void setWeeklyTime(Integer weeklyTime) {
+		this.weeklyTime = weeklyTime;
+	}
+
+	public Integer getSessionDuration() {
+		return sessionDuration;
+	}
+
+	public void setSessionDuration(Integer sessionDuration) {
+		this.sessionDuration = sessionDuration;
+	}
+
+	public Integer getNumberOfExerClass() {
+		return numberOfExerClass;
+	}
+
+	public void setNumberOfExerClass(Integer numberOfExerClass) {
+		this.numberOfExerClass = numberOfExerClass;
+	}
+
+	public Integer getNumberOfExerGame() {
+		return numberOfExerGame;
+	}
+
+	public void setNumberOfExerGame(Integer numberOfExerGame) {
+		this.numberOfExerGame = numberOfExerGame;
+	}
+
+	public Integer getNumberOfActiveLifestyleActivity() {
+		return numberOfActiveLifestyleActivity;
+	}
+
+	public void setNumberOfActiveLifestyleActivity(Integer numberOfActiveLifestyleActivity) {
+		this.numberOfActiveLifestyleActivity = numberOfActiveLifestyleActivity;
+	}
+
+	public CardiacRehabilitationProgramme getCardiacRehabilitationProgramme() {
+		return cardiacRehabilitationProgramme;
+	}
+
+	public void setCardiacRehabilitationProgramme(CardiacRehabilitationProgramme cardiacRehabilitationProgramme) {
+		this.cardiacRehabilitationProgramme = cardiacRehabilitationProgramme;
+	}
+
+	public WorkoutSession getWorkoutSession() {
+		return workoutSession;
+	}
+
+	public void setWorkoutSession(WorkoutSession workoutSession) {
+		this.workoutSession = workoutSession;
+	}
+
+	public static boolean isValid(io.swagger.client.model.ExerciseProgramme hdmsProgramme){
+		return hdmsProgramme.getWeeklyTime()!=null;
+	}
+	
+}

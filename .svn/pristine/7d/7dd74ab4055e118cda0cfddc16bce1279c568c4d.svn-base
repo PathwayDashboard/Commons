@@ -1,0 +1,86 @@
+package it.eng.pathway.fake.model;
+
+import it.eng.pathway.utility.StringUtil;
+
+public enum ActivityType {
+
+//	RUNNING(1,"resources/images/jpg/running_filled.png"),
+//	WALKING(3,"resources/images/jpg/walking_filled.png"),
+//	CYCLING(2,"resources/images/jpg/regular_biking_filled.png"), 
+//	GOLF(32,"resources/images/jpg/golf_filled.png"), 
+//	GUIDEDWORKOUT(105,"resources/images/jpg/gymnastic_filled.png"), 
+//	FREEPLAY(0,"resources/images/jpg/trampoline_park_filled.png"),
+//	
+//	
+//	DAILYLIVINGACTIVITY(0,""),
+//	ROWING(8,""),
+//	SWIMMING(22,""),
+//	SOCCER(35,""),
+//	CRICKET(36,""),
+//	BASKETBALL(37,""),
+//	RUGBY(39,""),
+//	VOLLEYBALL(41,""),
+//	HANDBALL(44,""),
+//	BEACHVOLLEY(45,""),
+//	DANCING(48,""),
+//	RIDING(50,""),
+//	FITNESSMARTIALARTS(52,""),
+//	BOOTCAMP(54,""),
+//	AEROBICS(57,""),
+//	AQUAFITNESS(58,""),
+//	STEPWORKOUT(59,""),
+//	SAILING(69,""),
+//	TABLETENNIS(72,""),
+//	CLIMBING(74,""),
+//	GYMNASTICS(90,""),
+//	RACKETSPORTS(104,""),
+//	STRENGTHCONDITIONING(105,""),
+//	MOBILITYSTABILITY(106,"");
+	
+	 
+	FREEPLAY(1,"resources/images/jpg/trampoline_park_filled.png"),
+	DAILYLIVINGACTIVITY(1,""),
+	RUNNING(2,"resources/images/jpg/running_filled.png"),
+	CYCLING(3,"resources/images/jpg/regular_biking_filled.png"), 
+	WALKING(4,"resources/images/jpg/walking_filled.png"),
+	ROWING(5,""),
+	SWIMMING(6,""),
+	GOLF(7,"resources/images/jpg/golf_filled.png"), 
+	SOCCER(8,""),
+	CRICKET(9,""),
+	BASKETBALL(10,""),
+	RUGBY(11,""),
+	VOLLEYBALL(12,""),
+	HANDBALL(13,""),
+	BEACHVOLLEY(14,""),
+	DANCING(15,""),
+	RIDING(16,""),
+	FITNESSMARTIALARTS(17,""),
+	BOOTCAMP(18,""),
+	AEROBICS(19,""),
+	AQUAFITNESS(20,""),
+	STEPWORKOUT(21,""),
+	SAILING(22,""),
+	TABLETENNIS(23,""),
+	CLIMBING(24,""),
+	GYMNASTICS(25,""),
+	RACKETSPORTS(26,""),
+	STRENGTHCONDITIONING(27,"resources/images/jpg/gymnastic_filled.png"),
+	MOBILITYSTABILITY(28,"");
+	
+	private int code;
+	private String path;
+
+	ActivityType(int numVal, String path) {
+        this.code = numVal;
+        this.path = StringUtil.isValid(path) ? path : "resources/images/jpg/walking_filled.png"; 
+    }
+
+    public int getCode() {
+        return code;
+    }
+    
+    public String getPath(){
+    	return path;
+    }
+}
